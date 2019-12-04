@@ -12,43 +12,7 @@
 
 
 <body>
-      <?php
-        if(isset($_POST['sendmail'])) {
-
-            require 'PHPMailerAutoload.php';
-            require 'credential.php';
-
-            $mail = new PHPMailer;
-
-            // $mail->SMTPDebug = 4;                               // Enable verbose debug output
-
-            $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-            $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = EMAIL;                 // SMTP username
-            $mail->Password = PASS;                           // SMTP password
-            $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-            $mail->Port = 465;                                    // TCP port to connect to
-
-            $mail->setFrom(EMAIL, 'Farmersfoundation');
-            $mail->addAddress(EMAIL);     // Add a recipient
-
-            $mail->addReplyTo($_POST['email']);
-
-            $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Name = $_POST['name']; 
-            $mail->Address = $_POST['address'];
-            $mail->Body    = $_POST['message'];
-            $mail->AltBody = $_POST['message'];
-
-            if(!$mail->send()) {
-                echo 'Message could not be sent.';
-                echo 'Mailer Error: ' . $mail->ErrorInfo;
-            } else {
-                echo 'Message has been sent';
-            }
-        }
-     ?>
+     
 <div class="page-wrapper">  
     <!-- Preloader -->
     
@@ -126,7 +90,7 @@
                         <h3>Send <span>Message</span></h3>
                     </div>                    
                     <div class="default-form-area">
-                        <form id="contact-form" name="contact_form" class="default-form" action="http://html.tonatheme.com/2017/charity2/inc/sendmail.php" method="post" novalidate="novalidate">
+                        <form id="contact-form" name="contact_form" class="default-form"  method="post" action="mail.php" novalidate="novalidate">
                             <div class="row">
                                 <div class="col-md-6 col-sm-12 col-xs-12">
                                     <div class="form-group">
@@ -140,12 +104,12 @@
                                     </div>
                                     <div class="form-group">
                                         <input id="form_botcheck" name="form_botcheck" class="form-control" type="hidden" value="">
-                                        <button class="btn-style-two" type="submit" id="submit" name="sendmail" data-loading-text="Please wait...">send message</button>
+                                        <button class="btn-style-two"  type="submit" value="Submit" id="submit" data-loading-text="Please wait...">send message</button>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12 col-xs-12">
                                     <div class="form-group">
-                                        <textarea placeholder="message"></textarea>
+                                        <textarea placeholder="message" name="comments"></textarea>
                                     </div>
                                 </div>
                             </div>                                        
